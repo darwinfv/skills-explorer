@@ -7,3 +7,8 @@
 #stuff {
     margin-left: 10px;
 }
+
+.alert {
+    visibility: hidden;
+    /* margin: 10px; */
+}

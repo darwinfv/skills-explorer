@@ -1,21 +1,38 @@
 const baseUrl = 'http://api.dataatwork.org/v1/'
 const autoUrl = baseUrl + '/jobs/autocomplete?contains=';
 
-function submit() {
+async function submit() {
     let rawdata = $('form').serialize();
     let arr = rawdata.split('&');
 
     let district = arr[arr.length - 4].substring(9);
     let jobs = arr.slice(9);
+    let ids = [];
     for (var i = 0; i < 3; i++) {
         jobs[i] = jobs[i].substring(5);
+        if (jobs[i] != '') {
+            ids[i] = await getUuid(jobs[i], i+1)
+        }
     }
 
-    fetch(url)
+    fetch(url + `/jobs/related_skills`)
     .then(data => data.json())
     .then(resp => console.log(resp));
 
     
+}
+
+async function getUuid(name, i) {
+    let data = await fetch(autoUrl + `${name}&begins_with=${name}&ends_with=${name}`);
+    if (data.status == 404) {
+        $('#alert' + i).css('visibility', 'visible');
+        setTimeout(() => {
+            $('#alert' + i).css('visibility', 'hidden')
+        }, 3000);
+        return;
+    }
+    let resp = await data.json();
+    return resp[0].uuid;
 }
 
 let job1 = document.getElementById('job1')
