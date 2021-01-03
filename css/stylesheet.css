@@ -1,3 +1,7 @@
+h6 {
+    margin-top: 20px;
+}
+
 #header {
     background-color: rgb(20, 185, 69);
     border-style: solid;
@@ -12,3 +16,8 @@
     visibility: hidden;
     /* margin: 10px; */
 }
+
+/* 
+body{
+    padding:50px;
+} */
