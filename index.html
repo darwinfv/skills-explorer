@@ -24,18 +24,15 @@
                 <div class="row align-items-center">
                     <div class="col-auto">
                         <label for="first" class="form-label">First Name</label>
-                        <input type="text" class="form-control" placeholder="John" name="first" aria-label="First name" autocomplete="given-name">
-                         <!-- required> -->
+                        <input type="text" class="form-control" placeholder="John" name="first" aria-label="First name" autocomplete="given-name" required>
                     </div>
                     <div class="col-auto">
                         <label for="last" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" placeholder="Doe" name="last" aria-label="Last name" autocomplete="family-name">
-                         <!-- required> -->
+                        <input type="text" class="form-control" placeholder="Doe" name="last" aria-label="Last name" autocomplete="family-name" required>
                     </div>
                     <div class="col-auto">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" placeholder="johndoe@example.com" name="email" aria-label="Email" autocomplete="email">
-                         <!-- required> -->
+                        <input type="email" class="form-control" placeholder="johndoe@example.com" name="email" aria-label="Email" autocomplete="email" required>
                     </div>
                 </div>
 
@@ -44,8 +41,7 @@
                 <div class="row">
                     <div class="col-auto">
                         <label for="street" class="form-label">Address 1</label>
-                        <input type="text" class="form-control" placeholder="123 Main St" name="street" aria-label="Address 1">
-                         <!-- required> -->
+                        <input type="text" class="form-control" placeholder="123 Main St" name="street" aria-label="Address 1" autocomplete="street-address" required>
                     </div>
                     <div class="col-auto">
                         <label for="apt" class="form-label">Address 2</label>
@@ -58,13 +54,11 @@
                 <div class="row">
                     <div class="col-auto">
                         <label for="city" class="form-label">City</label>
-                        <input type="text" class="form-control" placeholder="Chicago" name="city" aria-label="City">
-                         <!-- required> -->
+                        <input type="text" class="form-control" placeholder="Chicago" name="city" aria-label="City" autocomplete="address-level2" required>
                     </div>
                     <div class="col-auto">
                         <label for="state" class="form-label">State</label>
-                        <input type="text" class="form-control" placeholder="IL" name="state" aria-label="State">
-                         <!-- required> -->
+                        <input type="text" class="form-control" placeholder="IL" name="state" aria-label="State" autocomplete="address-level1" required>
                     </div>
                     <div class="col-auto">
                         <label for="zip" class="form-label">ZIP Code</label>
@@ -77,13 +71,14 @@
                 <label for="district" class="form-label">District</label>
                 <select class="form-select" name="district" aria-label="District">
                     <option selected>Select District</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="4">Three</option>
-                    <option value="5">Thre</option>
-                    <option value="6">Thee</option>
-                    <option value="7">Tree</option>
-                    <option value="8">hree</option>
+                    <option value="1">Anderson</option>
+                    <option value="2">Bloomington</option>
+                    <option value="3">Carmel</option>
+                    <option value="4">Frankfort</option>
+                    <option value="5">Kokomo</option>
+                    <option value="6">South Bend</option>
+                    <option value="7">Terre Haute</option>
+                    <option value="8">Zionsville</option>
                 </select>
 
                 <br>
@@ -91,7 +86,7 @@
                 <label for="jobs" class="form-label">Insert upto 3 Job Titles</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text">1</span>
-                    <input type="text" list="job1list" id="job1" class="form-control" name="job1" aria-label="Job Title 1">
+                    <input type="text" list="job1list" id="job1" class="form-control" name="job1" aria-label="Job Title 1" required>
                     <datalist id="job1list"></datalist>
                     <span class="input-group-text">2</span>
                     <input type="text" list="job2list" id="job2" class="form-control" name="job2" aria-label="Job Title 2">

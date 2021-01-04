@@ -3,6 +3,8 @@ const autoUrl = baseUrl + '/jobs/autocomplete?contains=';
 
 let results = document.getElementById('results');
 let spin = document.getElementById('spinner');
+let modaltemp = document.getElementById('modal');
+let modal = new bootstrap.Modal(modaltemp);
 
 async function submit() {
     let rawdata = $('form').serialize();
@@ -14,7 +16,9 @@ async function submit() {
     for (let i = 0; i < 3; i++) {
         jobs[i] = jobs[i].substring(5);
         if (jobs[i] != '') {
-            ids[i] = await getUuid(jobs[i], i+1)
+            let temp = await getUuid(jobs[i], i+1)
+            ids[i] = temp[0]
+            jobs[i] = temp[1];
         }
     }
 
@@ -22,15 +26,17 @@ async function submit() {
         return;
     }
 
-    let modaltemp = document.getElementById('modal');
-    let modal = new bootstrap.Modal(modaltemp);
     spin.hidden = false;
     results.hidden = true;
     modal.show();
 
     let skills = [];
     for (let i = 0; i < ids.length; i++) {
-        skills[i] = await getSkills(ids[i]);
+        skills[i] = await getSkills(ids[i], jobs[i]);
+    }
+
+    if (skills.includes(undefined)) {
+        return;
     }
 
     showModal(jobs, ids, skills);    
@@ -46,11 +52,16 @@ async function getUuid(name, i) {
         return;
     }
     let resp = await data.json();
-    return resp[0].uuid;
+    return [resp[0].uuid, resp[0].suggestion];
 }
 
-async function getSkills(uuid) {
+async function getSkills(uuid, job) {
     let data = await fetch(baseUrl + `/jobs/${uuid}/related_skills`)
+    if (data.status == 404) {
+        modal.hide();
+        alert(`Unfortunately, the job title '${job}' is missing the skills associated with it. Please retry your search with a different job.`)
+        return;
+    }
     let resp = await data.json();
     return resp.skills.slice(0, 3);
 }
@@ -63,7 +74,7 @@ function showModal(jobs, ids, skills) {
 
     for (let i = 0; i < ids.length; i++) {
         sets[i].hidden = false;
-        headers[i].innerHTML = jobs[i].replaceAll('%20', ' ');
+        headers[i].innerHTML = jobs[i];
         for (let j = 0; j < 3; j++) {
             titles[i * 3 + j].innerHTML = skills[i][j]['skill_name'].replace(/\b\w/g, l => l.toUpperCase())
             desc[i * 3 + j].innerHTML = skills[i][j].description.charAt(0).toUpperCase() + skills[i][j].description.slice(1);
