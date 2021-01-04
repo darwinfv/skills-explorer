@@ -10,7 +10,6 @@ async function submit() {
     let rawdata = $('form').serialize();
     let arr = rawdata.split('&');
 
-    let district = arr[arr.length - 4].substring(9);
     let jobs = arr.slice(9);
     let ids = [];
     for (let i = 0; i < 3; i++) {
